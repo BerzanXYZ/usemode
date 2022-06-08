@@ -18,7 +18,7 @@ return (
 )
 ```
 
-> This will
+> Mode will be changed if the user clicks the button
 
 ## Usage
 - Import the library
