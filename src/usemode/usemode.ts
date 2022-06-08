@@ -30,12 +30,14 @@ export function useMode(m: Mode = LightMode) {
         _setMode(localMode)
     }, [m, applyDarkMode, applyLightMode])    
 
-    // Return object
-    return {
-        modeName: _mode,
-        isDarkMode: _mode === DarkMode ? true : false,
-        setDarkMode: applyDarkMode,
-        setLightMode: applyLightMode,
-        toggleMode: toggleMode,
-    } as const
+    // Main object
+    const mode = {
+        name: _mode,
+        isDark: _mode === DarkMode ? true : false,
+        setDark: applyDarkMode,
+        setLight: applyLightMode,
+        toggle: toggleMode,
+    }
+
+    return mode
 }

@@ -1,7 +1,7 @@
 # useMode hook
 🌙 🌞 Simplest way to handle theming in React.js apps
 
-> useMode() hook is for all your theming purposes
+> useMode is for applying dark and light mode easily, safely and quickly
 
 > It saves theme to localstorage of the browser
 
@@ -11,56 +11,58 @@
 
 - You can use it like below
 ```jsx
-const { toggleMode } = useMode()
+const mode = useMode()
 
 return (
-  <button onClick={toggleMode}> Click </button>
+  <button onClick={mode.toggle}> Click </button>
 )
 ```
 
+> This will
+
 ## Usage
-- It has those `modeName`, `isDarkMode`, `setDarkMode`, `setLightMode`, `toggleMode`
+- `mode` object has those `toggle`, `setDark`, `setLight`, `name`, `isDark` properties
 
 ```jsx
-const { toggleMode, setDarkMode, setLightMode, modeName, isDarkMode } = useMode()
+const mode = useMode()
 ```
 
 ## Docs
 
-#### toggleMode()
+#### *toggle()
 ```jsx
-toggleMode(): function
+mode.toggle(): function
 ```
 > Switches mode as dark and light
 
 <br/>
 
-#### setDarkMode()
+#### *setDark()
 ```jsx
-setDarkMode(): function
+mode.setDark(): function
 ```
 > Applies dark mode if it hasn't been done yet
 
 <br/>
 
-#### setLightMode()
+#### *setLight()
 ```jsx
-setLightMode(): function
+mode.setLight(): function
 ```
 > Applies light mode if it hasn't been done yet
 
 <br/>
 
-#### modeName
+#### *name
 ```jsx
-modeName: "light" || "dark"
+mode.name: "light" || "dark"
 ```
 > Name of the current mode
 
 <br/>
 
-#### isDarkMode
+#### *isDark
 ```jsx
-isDarkMode: true || false
+mode.isDark: true || false
 ```
 > True, if dark mode is used currently. Otherwise, false.
