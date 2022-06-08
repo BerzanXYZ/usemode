@@ -1,2 +1,3 @@
-# usemode
-🌙 🌞 Simplest and fastest way to handle theming in React.js apps
+# useMode hook
+🌙 🌞 Simplest way to handle theming in React.js apps
+

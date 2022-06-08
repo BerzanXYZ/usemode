@@ -1,0 +1,9 @@
+{
+  "name": "usemode",
+  "version": "1.0.0",
+  "description": "🌙 🌞 Simplest and fastest way to handle theming in React.js apps",
+  "main": "index.js",
+  "repository": "https://github.com/BerzanXYZ/usemode.git",
+  "author": "BerzanXYZ <berzan@tutanota.com>",
+  "license": "MIT"
+}
