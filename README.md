@@ -21,10 +21,28 @@ return (
 > This will
 
 ## Usage
+- Import the library
+
+```jsx
+import useMode from "usemode"
+```
+
 - `mode` object has those `toggle`, `setDark`, `setLight`, `name`, `isDark` properties
 
 ```jsx
 const mode = useMode()
+```
+
+## Installation
+
+#### NPM
+```
+npm i usemode
+```
+
+#### Yarn
+```
+yarn add usemode
 ```
 
 ## Docs
