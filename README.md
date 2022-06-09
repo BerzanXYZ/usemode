@@ -47,7 +47,7 @@ yarn add usemode
 
 ## Docs
 
-#### *toggle()
+#### toggle()
 ```jsx
 mode.toggle(): function
 ```
@@ -55,7 +55,7 @@ mode.toggle(): function
 
 <br/>
 
-#### *setDark()
+#### setDark()
 ```jsx
 mode.setDark(): function
 ```
@@ -63,7 +63,7 @@ mode.setDark(): function
 
 <br/>
 
-#### *setLight()
+#### setLight()
 ```jsx
 mode.setLight(): function
 ```
@@ -71,7 +71,7 @@ mode.setLight(): function
 
 <br/>
 
-#### *name
+#### name
 ```jsx
 mode.name: "light" || "dark"
 ```
@@ -79,7 +79,7 @@ mode.name: "light" || "dark"
 
 <br/>
 
-#### *isDark
+#### isDark
 ```jsx
 mode.isDark: true || false
 ```
