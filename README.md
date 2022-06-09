@@ -12,13 +12,25 @@
 - You can use it like below
 ```jsx
 const mode = useMode()
+```
+```jsx
+<button onClick={mode.toggle}>Switch</button>
 
-return (
-  <button onClick={mode.toggle}> Click </button>
-)
 ```
 
 > Mode will be changed if the user clicks the button
+
+<br>
+
+This library needs TailwindCSS to be configured especially to work
+
+> Add this line to tailwind.config.js 
+```javascript
+module.exports = {
+   darkMode: 'class',
+   ...
+}
+```
 
 ## Usage
 - Import the library
