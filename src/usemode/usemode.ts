@@ -1,43 +1,102 @@
-import { useCallback, useEffect, useState } from "react"
-import { DarkMode, LightMode, Mode } from "./types"
+import { useEffect, useState } from "react"
+import { DarkMode, LightMode, Mode, SystemMode } from "./types"
 
-export function useMode(m: Mode = LightMode) {
-    const [_mode, _setMode] = useState<Mode>(m)
+function modeToName(m: Mode): string {
+    console.log("rendered modeToName()")
+    switch(m) {
+        case SystemMode: return "System"
+        case LightMode: return "Light"
+        case DarkMode: return "Dark"
+    }
+}
 
-    // Applies dark mode
-    const applyDarkMode = useCallback(() => {
-        document.body.classList.add("dark")
-        _setMode(DarkMode)
-        localStorage.setItem("mode", DarkMode)
-    }, [])
+function prefersDark() {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+}
 
-    // Applies light mode
-    const applyLightMode = useCallback(() => {
-        document.body.classList.remove("dark")
-        _setMode(LightMode)
-        localStorage.setItem("mode", LightMode)
-    }, [])
+function getSavedMode() {
+    return localStorage.getItem("mode")
+}
 
-    // Toggles mode
-    const toggleMode = useCallback(() => {
-        _mode === LightMode ? applyDarkMode() : applyLightMode()
-    }, [_mode , applyLightMode, applyDarkMode])
+function applySystem() {
+    prefersDark() ? applyDark() : applyLight()
+}
 
-    // Runs at startup
-    useEffect(() => {
-        const localMode = localStorage.getItem("mode") as Mode || m
-        localMode === LightMode ? applyLightMode() : applyDarkMode()
-        _setMode(localMode)
-    }, [m, applyDarkMode, applyLightMode])    
+function applyDark() {
+    document.body.classList.add("dark")
+}
 
-    // Main object
-    const mode = {
-        name: _mode,
-        isDark: _mode === DarkMode ? true : false,
-        setDark: applyDarkMode,
-        setLight: applyLightMode,
-        toggle: toggleMode,
+function applyLight() {
+    document.body.classList.remove("dark")
+}
+
+function addModeListener() {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        applySystem()
+    })
+}
+
+function removeModeListener() {
+    window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', () => {
+        applySystem()
+    })
+}
+
+export function useMode(prmMode: Mode = SystemMode) {
+    const [mode, setMode] = useState<Mode>(prmMode)
+
+    function saveMode(m: Mode) {
+        setMode(m)
+        localStorage.setItem("mode", m)
     }
 
-    return mode
+    // Init theme
+    useEffect(() => {
+        let localMode = getSavedMode() || prmMode
+        if(localMode === SystemMode) {
+            applySystem()
+            addModeListener()
+        } else if(localMode === DarkMode) {
+            applyDark()
+        }
+    }, [])
+
+    // Run if mode changes by the user
+    useEffect(() => {
+        switch(mode) {
+            case SystemMode: {
+                applySystem()
+                addModeListener()
+                break
+            }
+            case LightMode: {
+                applyLight()
+                saveMode(LightMode)
+                removeModeListener()
+                break
+            }
+            case DarkMode: {
+                applyDark()
+                saveMode(DarkMode)
+                removeModeListener()
+                break
+            }
+        }
+
+    }, [mode])
+
+    return {
+        isDark : mode === DarkMode,
+        name: () => modeToName(mode),
+        setDark: () => { setMode(DarkMode) },
+        setLight: () => { setMode(LightMode) },
+        setSystem: () => { setMode(SystemMode) },
+        toggle: () => {
+            if (mode === DarkMode) {
+                setMode(LightMode)
+            } else if(mode === LightMode) {
+                setMode(DarkMode)
+            }
+        },
+    } as const
 }
