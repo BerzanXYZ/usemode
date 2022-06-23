@@ -27,6 +27,7 @@ This library needs TailwindCSS to be configured especially to work
 > Add this line to tailwind.config.js 
 ```javascript
 module.exports = {
+   ...
    darkMode: 'class',
    ...
 }
@@ -39,7 +40,7 @@ module.exports = {
 import useMode from "usemode"
 ```
 
-- `mode` object has those `toggle`, `setDark`, `setLight`, `name`, `isDark` properties
+- `mode` object has those `toggle`, `setSystem`, `setDark`, `setLight`, `name`, `isDark` properties
 
 ```jsx
 const mode = useMode()
@@ -64,6 +65,14 @@ yarn add usemode
 mode.toggle(): function
 ```
 > Switches mode as dark and light
+
+<br/>
+
+#### setSystem()
+```jsx
+mode.setSystem(): function
+```
+> Applies system preferred mode
 
 <br/>
 

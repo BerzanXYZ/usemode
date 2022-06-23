@@ -86,7 +86,7 @@ export function useMode(prmMode: Mode = SystemMode) {
     }, [mode])
 
     return {
-        isDark : mode === DarkMode,
+        isDark: mode === DarkMode,
         name: () => modeToName(mode),
         setDark: () => { setMode(DarkMode) },
         setLight: () => { setMode(LightMode) },
