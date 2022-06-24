@@ -1,14 +1,6 @@
 import { useEffect, useState } from "react"
 import { DarkMode, LightMode, Mode, SystemMode } from "./types"
 
-function modeToName(m: Mode): string {
-    console.log("rendered modeToName()")
-    switch(m) {
-        case SystemMode: return "System"
-        case LightMode: return "Light"
-        case DarkMode: return "Dark"
-    }
-}
 
 function prefersDark() {
     return window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -42,13 +34,12 @@ function removeModeListener() {
     })
 }
 
+function saveMode(m: Mode) {
+    localStorage.setItem("mode", m)
+}
+
 export function useMode() {
     const [mode, setMode] = useState<Mode>(SystemMode)
-
-    function saveMode(m: Mode) {
-        setMode(m)
-        localStorage.setItem("mode", m)
-    }
 
     // Init theme
     useEffect(() => {
@@ -87,9 +78,8 @@ export function useMode() {
 
     }, [mode])
 
-    return {
+    const retMode =  {
         isDark: mode === DarkMode,
-        name: modeToName(mode),
         setDark: () => { setMode(DarkMode) },
         setLight: () => { setMode(LightMode) },
         setSystem: () => { setMode(SystemMode) },
@@ -100,5 +90,7 @@ export function useMode() {
                 mode === DarkMode ? setMode(LightMode) : setMode(LightMode)
             }
         },
-    } as const
+    }
+
+    return retMode
 }
