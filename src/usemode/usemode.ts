@@ -42,8 +42,8 @@ function removeModeListener() {
     })
 }
 
-export function useMode(prmMode: Mode = SystemMode) {
-    const [mode, setMode] = useState<Mode>(prmMode)
+export function useMode() {
+    const [mode, setMode] = useState<Mode>(SystemMode)
 
     function saveMode(m: Mode) {
         setMode(m)
@@ -52,7 +52,7 @@ export function useMode(prmMode: Mode = SystemMode) {
 
     // Init theme
     useEffect(() => {
-        let localMode = getSavedMode() || prmMode
+        let localMode = getSavedMode() || SystemMode
         if(localMode === SystemMode) {
             applySystem()
             addModeListener()
@@ -67,6 +67,7 @@ export function useMode(prmMode: Mode = SystemMode) {
         switch(mode) {
             case SystemMode: {
                 applySystem()
+                saveMode(SystemMode)
                 addModeListener()
                 break
             }
@@ -88,7 +89,7 @@ export function useMode(prmMode: Mode = SystemMode) {
 
     return {
         isDark: mode === DarkMode,
-        name: () => modeToName(mode),
+        name: modeToName(mode),
         setDark: () => { setMode(DarkMode) },
         setLight: () => { setMode(LightMode) },
         setSystem: () => { setMode(SystemMode) },
