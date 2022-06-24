@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react"
 import { DarkMode, LightMode, Mode, SystemMode } from "./types"
 
+function modeToName(m: Mode) {
+    switch(m) {
+        case SystemMode: return "System";
+        case LightMode: return "Light";
+        case DarkMode: return "Dark";
+    }
+}
 
 function prefersDark() {
     return window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -81,6 +88,7 @@ export function useMode() {
 
     // Object that is returned
     const retMode =  {
+        name: modeToName(mode),
         isDark: mode === DarkMode,
         setDark: () => { setMode(DarkMode) },
         setLight: () => { setMode(LightMode) },
