@@ -87,7 +87,7 @@ export function useMode() {
             if(mode === SystemMode) {
                 prefersDark() ? setMode(LightMode) : setMode(DarkMode)
             } else {
-                mode === DarkMode ? setMode(LightMode) : setMode(LightMode)
+                mode === DarkMode ? setMode(LightMode) : setMode(DarkMode)
             }
         },
     }
