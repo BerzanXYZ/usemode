@@ -75,9 +75,9 @@ export function useMode() {
                 break
             }
         }
-
     }, [mode])
 
+    // Object that is returned
     const retMode =  {
         isDark: mode === DarkMode,
         setDark: () => { setMode(DarkMode) },
