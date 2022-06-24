@@ -49,6 +49,8 @@ export function useMode() {
             addModeListener()
         } else if(localMode === DarkMode) {
             applyDark()
+        } else if(localMode === LightMode) {
+            applyLight()
         }
         setMode(localMode as Mode)
     }, [])
