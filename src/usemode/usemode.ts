@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react"
-import { DarkMode, LightMode, Mode, SystemMode } from "./types"
+import { DarkMode, LightMode, Mode, SystemMode, UndefinedMode } from "./types"
 
-function modeToName(m: Mode) {
-    switch(m) {
-        case SystemMode: return "System";
-        case LightMode: return "Light";
-        case DarkMode: return "Dark";
-    }
-}
 
 function prefersDark() {
     return window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -46,7 +39,7 @@ function saveMode(m: Mode) {
 }
 
 export function useMode() {
-    const [mode, setMode] = useState<Mode>(SystemMode)
+    const [mode, setMode] = useState<Mode>(UndefinedMode)
 
     // Init theme
     useEffect(() => {
@@ -88,7 +81,7 @@ export function useMode() {
 
     // Object that is returned
     const retMode =  {
-        name: modeToName(mode),
+        name: mode,
         isDark: mode === DarkMode,
         setDark: () => { setMode(DarkMode) },
         setLight: () => { setMode(LightMode) },
