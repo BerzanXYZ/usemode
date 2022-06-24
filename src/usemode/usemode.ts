@@ -59,6 +59,7 @@ export function useMode(prmMode: Mode = SystemMode) {
         } else if(localMode === DarkMode) {
             applyDark()
         }
+        setMode(localMode as Mode)
     }, [])
 
     // Run if mode changes by the user
@@ -92,10 +93,10 @@ export function useMode(prmMode: Mode = SystemMode) {
         setLight: () => { setMode(LightMode) },
         setSystem: () => { setMode(SystemMode) },
         toggle: () => {
-            if (mode === DarkMode) {
-                setMode(LightMode)
-            } else if(mode === LightMode) {
-                setMode(DarkMode)
+            if(mode === SystemMode) {
+                prefersDark() ? setMode(LightMode) : setMode(DarkMode)
+            } else {
+                mode === DarkMode ? setMode(LightMode) : setMode(LightMode)
             }
         },
     } as const
